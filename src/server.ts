@@ -34,11 +34,7 @@ server.delete<{Params: TaskParams}>("/tasks/:id", async (request, reply) => {
 const PORT = Number(process.env.PORT) || 3333;
 const HOST = "0.0.0.0";
 
-server.listen({ port: PORT, host: HOST  })
-  .then(address => {
-    console.log(`Servidor rodando em ${address}`);
-  })
-  .catch(err => {
-    console.error("Erro ao iniciar o servidor:", err);
-    process.exit(1);
-  });
+server.listen({ 
+  port: PORT, 
+  host: HOST  
+})

@@ -1,4 +1,5 @@
 import fastify from "fastify";
+import cors from "@fastify/cors"
 import Task, { DatabasePostgres } from "../database-postgres";
 
 interface TaskParams {
@@ -8,6 +9,11 @@ interface TaskParams {
 
 const database = new DatabasePostgres();
 const server = fastify();
+
+server.register(cors, {
+  origin: ['http://localhost:5173', 'https://todo-server-5f4x.onrender.com/tasks'], // Permitir a origem do seu frontend local e em produção
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Permitir os métodos que você vai usar
+});
 
 server.post("/tasks", async (request, reply) => {
   const body = request.body as Omit<Task, "id">
@@ -38,3 +44,5 @@ server.listen({
   port: PORT, 
   host: HOST  
 })
+
+console.log("servidor rodando ")

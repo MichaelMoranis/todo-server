@@ -2,7 +2,7 @@ import { sql } from "./sql";
 
 export default interface Task {
   id?: number;
-  newText: string;
+  newtext: string;
   isChecked: boolean;
 }
 
@@ -13,10 +13,10 @@ export class DatabasePostgres {
   }
 
 async create(task: Task) {
-    const { newText, isChecked } = task;
+    const { newtext, isChecked } = task;
     const result = await sql`
         insert into tasks (newText, isChecked)
-        VALUES (${newText}, ${isChecked})
+        VALUES (${newtext}, ${isChecked})
         returning id;
      `;
      const newTaskId = result[0].id

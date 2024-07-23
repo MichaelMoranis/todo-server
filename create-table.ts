@@ -7,7 +7,7 @@ import { sql } from "./sql"
 sql`
  CREATE TABLE tasks (
     id SERIAL PRIMARY KEY,
-    newText TEXT NOT NULL,
+    newtext TEXT NOT NULL,
     isChecked BOOLEAN DEFAULT FALSE
 );
 

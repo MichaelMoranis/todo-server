@@ -1,15 +1,15 @@
-POST https://todo-server-lm1u.onrender.com/tasks
+POST https://todo-server-kr76.onrender.com/tasks
 Content-Type: application/json
 
 {
-    "newText": "new route",
+    "newtext": "new route",
     "isChecked": true
 }
 
 ###
 
-GET https://todo-server-lm1u.onrender.com/tasks
+GET https://todo-server-kr76.onrender.com/tasks
 
 ### 
 
-DELETE https://todo-server-lm1u.onrender.com/tasks/14
+DELETE https://todo-server-kr76.onrender.com/tasks/1

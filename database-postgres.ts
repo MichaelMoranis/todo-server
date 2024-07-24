@@ -16,7 +16,7 @@ async create(task: Task) {
     const result = await sql`
         insert into tasks (newtext, isChecked)
         VALUES (${newtext}, ${isChecked})
-        returning id;
+        returning id, newtext, isChecked;
      `;
      const newTaskId = result[0].id
      return newTaskId

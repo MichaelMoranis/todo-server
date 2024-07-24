@@ -11,7 +11,7 @@ const database = new DatabasePostgres();
 const server = fastify();
 
 server.register(cors, {
-  origin: ["http://localhost:5173", "https://todo-server-lm1u.onrender.com/"], // Permitir a origem do seu frontend local e em produção
+  origin: ["http://localhost:5173", "https://todo-server-kr76.onrender.com/"], // Permitir a origem do seu frontend local e em produção
   methods: ["GET", "POST", "PUT", "DELETE"], // Permitir os métodos que você vai usar
 });
 
@@ -19,9 +19,9 @@ server.post("/tasks", async (request, reply) => {
   const body = request.body as Omit<Task, "id">;
 
   try {
-    await database.create(body);
+    const newTask = await database.create(body);
     console.log(database.list());
-    return reply.status(201).send();
+    return reply.status(201).send(newTask);
   } catch (error) {
     console.error("Erro ao criar tarefa:", error);
     return reply.status(500).send("Erro interno do servidor");

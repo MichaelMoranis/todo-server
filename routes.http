@@ -8,8 +8,8 @@ Content-Type: application/json
 
 ###
 
-GET https://todo-server-kr76.onrender.com/tasks
+GET https://todo-server-hpwp.onrender.com/tasks
 
 ### 
 
-DELETE https://todo-server-kr76.onrender.com/tasks/1
+DELETE https://todo-server-hpwp.onrender.com/tasks/14

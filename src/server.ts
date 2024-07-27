@@ -11,7 +11,10 @@ const database = new DatabasePostgres();
 const server = fastify();
 
 server.register(cors, {
-  origin: ["http://localhost:5173", "https://todo-server-hpwp.onrender.com/tasks"], // Permitir a origem do seu frontend local e em produção
+  origin: [
+    "http://localhost:5173",
+    'https://app-tarefa.vercel.app',
+    "https://todo-server-hpwp.onrender.com/tasks"], // Permitir a origem do seu frontend local e em produção
   methods: ["GET", "POST", "PUT", "DELETE"], // Permitir os métodos que você vai usar
 });
 

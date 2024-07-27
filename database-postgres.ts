@@ -22,7 +22,7 @@ async create(task: Task) {
      return newTaskId
   }
 
-  async delete(id: string) {
+  async delete(id: number) {
     // Remove a tarefa com o ID fornecido
     await sql`
         DELETE FROM tasks

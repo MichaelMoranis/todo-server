@@ -11,10 +11,16 @@ const database = new DatabasePostgres();
 const server = fastify();
 
 server.register(cors, {
-  origin: [
-    "https://app-tarefa.vercel.app",
-    "http://localhost:5174", 
-  ], // Permitir a origem do seu frontend local e em produção
+  origin: (origin, callback) => {
+    const allowedOrigins = ["https://app-tarefa.vercel.app", "http://localhost:5174"];
+    if (!origin || allowedOrigins.includes(origin)) {
+      // Permitir a origem se ela estiver na lista de origens permitidas ou se não houver origem (por exemplo, solicitações internas)
+      callback(null, true);
+    } else {
+      // Rejeitar a origem se ela não estiver na lista de origens permitidas
+      callback(new Error("Not allowed by CORS"), false);
+    }
+  },
   methods: ["GET", "POST", "PUT", "DELETE"], // Permitir os métodos que você vai usar
 });
 

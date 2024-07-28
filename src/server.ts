@@ -31,12 +31,10 @@ server.post("/tasks", async (request, reply) => {
   }
 });
 
-server.get("/tasks", (req, reply) => {
-  reply.header("access-control-allow-origin", "https://https://todo-server-hpwp.onrender.com")
-  reply.send("lista de usuarios")
-  const tasks = database.list();
+server.get("/tasks", async (req, reply) => {
+  const tasks = await database.list();
 
-  return tasks;
+  return reply.send(tasks);
 });
 
 server.delete<{ Params: TaskParams }>("/tasks/:id", async (request, reply) => {

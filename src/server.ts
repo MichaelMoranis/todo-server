@@ -14,7 +14,7 @@ server.register(cors, {
   origin: [
     "http://localhost:5173",
     'https://app-tarefa.vercel.app',
-    "https://todo-server-hpwp.onrender.com/tasks"], // Permitir a origem do seu frontend local e em produção
+   ], // Permitir a origem do seu frontend local e em produção
   methods: ["GET", "POST", "PUT", "DELETE"], // Permitir os métodos que você vai usar
 });
 
@@ -31,7 +31,9 @@ server.post("/tasks", async (request, reply) => {
   }
 });
 
-server.get("/tasks", () => {
+server.get("/tasks", (req, reply) => {
+  reply.header("access-control-allow-origin", "https://https://todo-server-hpwp.onrender.com")
+  reply.send("lista de usuarios")
   const tasks = database.list();
 
   return tasks;

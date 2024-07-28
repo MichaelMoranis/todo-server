@@ -11,7 +11,7 @@ const database = new DatabasePostgres();
 const server = fastify();
 
 server.register(cors, {
-  origin: ["*"], // Permitir a origem do seu frontend local e em produção
+  origin: ["app-tarefa.vercel.app"], // Permitir a origem do seu frontend local e em produção
   methods: ["GET", "POST", "PUT", "DELETE"], // Permitir os métodos que você vai usar
 });
 

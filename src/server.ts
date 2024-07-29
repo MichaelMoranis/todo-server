@@ -12,7 +12,7 @@ const server = fastify();
 
 server.register(cors, {
   origin: (origin, callback) => {
-    const allowedOrigins = ["https://app-tarefa.vercel.app", "http://localhost:5174"];
+    const allowedOrigins = ["https://app-tarefa.vercel.app", "http://localhost:5173"];
     if (!origin || allowedOrigins.includes(origin)) {
       // Permitir a origem se ela estiver na lista de origens permitidas ou se não houver origem (por exemplo, solicitações internas)
       callback(null, true);

@@ -29,10 +29,8 @@ server.post("/tasks", async (request, reply) => {
 
   try {
     const newTask = await database.create(body);
-    console.log(database.list());
     return reply.status(201).send(newTask);
   } catch (error) {
-    console.error("Erro ao criar tarefa:", error);
     return reply.status(500).send("Erro interno do servidor");
   }
 });

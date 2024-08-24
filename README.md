@@ -15,8 +15,8 @@ Para rodar essa aplicação em seu ambiente local, siga os passos abaixo:
 
 1. **Clone o repositório**:
    ```bash
-   git clone https://github.com/seu-usuario/todo-app-api.git
-   cd todo-app-api
+   git clone https://github.com/seu-usuario/todo-server.git
+   cd todo-server
 ### Configurar o Banco de Dados:
 
 - Você precisa ter uma instância do PostgreSQL rodando.

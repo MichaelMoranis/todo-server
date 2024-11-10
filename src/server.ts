@@ -1,6 +1,6 @@
 import fastify from "fastify";
 import cors from "@fastify/cors";
-import Task, { DatabasePostgres } from "../database-postgres";
+import Task, { DatabasePostgres, User } from "../database-postgres";
 
 interface TaskParams {
   id: number;
@@ -12,7 +12,7 @@ const server = fastify();
 
 server.register(cors, {
   origin: (origin, callback) => {
-    const allowedOrigins = ["https://app-tarefa.vercel.app", "http://localhost:5173"];
+    const allowedOrigins = ["https://app-tarefa.vercel.app", "http://localhost:3000"];
     if (!origin || allowedOrigins.includes(origin)) {
       // Permitir a origem se ela estiver na lista de origens permitidas ou se não houver origem (por exemplo, solicitações internas)
       callback(null, true);
@@ -34,6 +34,18 @@ server.post("/tasks", async (request, reply) => {
     return reply.status(500).send("Erro interno do servidor");
   }
 });
+
+server.post("/register", async (request, reply) => {
+  const body = request.body as Omit<User, "id">;
+
+  try {
+    const newUser = await database.createUser(body);
+    return reply.status(201).send(newUser)
+  } catch (error) {
+    console.log("erro do uzuario" + error)
+    return reply.status(500).send("nao foi possivel criar o usuario")
+  }
+})
 
 server.get("/tasks", async (req, reply) => {
   const tasks = await database.list();

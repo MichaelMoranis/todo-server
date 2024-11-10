@@ -1,15 +1,26 @@
-POST https://todo-server-kr76.onrender.com/tasks
+POST https://todo-server-gdw2.onrender.com/tasks
 Content-Type: application/json
 
 {
-    "newtext": "new route",
+    "newtext": "server",
     "isChecked": true
 }
 
 ###
 
-GET https://todo-server-hpwp.onrender.com/tasks
+GET https://todo-server-gdw2.onrender.com/tasks
 
 ### 
 
-DELETE https://todo-server-hpwp.onrender.com/tasks/16
+DELETE https://todo-server-gdw2.onrender.com/tasks
+
+
+###
+POST http://localhost:3333/register
+Content-Type: application/json
+
+{
+  "username": "Uio",
+  "email": "123@exemplo.com",
+  "password": "123senha123ee"
+}

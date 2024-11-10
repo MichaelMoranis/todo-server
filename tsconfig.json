@@ -1,9 +1,13 @@
+
+
+
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "commonjs",
-    "outDir": "./dist",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "target": "ESNext",
+    "allowSyntheticDefaultImports": true,
     "strict": true,
-    "esModuleInterop": true                                                        
+    "esModuleInterop": true   
   }
 }

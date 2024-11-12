@@ -1,48 +1,26 @@
-// import 'dotenv/config'
-// import http from "http"
-// import { neon } from "@neondatabase/serverless";
-
-
-// export const sql = neon(process.env.DATABASE_URL);
-
-// const PORT = process.env.PORT || 3000;
-// const requestHandler = async (req, res) => {
-//   const result = await sql`SELECT version()`;
-//   const { version } = result[0];
-//   res.writeHead(200, { "Content-Type": "text/plain" });
-//   res.end(version);
-// };
-
-// http.createServer(requestHandler).listen(3000, () => {
-//   console.log(`Server running at http:/localhost:${PORT}`);
-// });
-
-import 'dotenv/config';
-import http from "http";
+// Carrega automaticamente as variáveis de ambiente
+import "dotenv/config";
+import { createServer } from "http";
 import { neon } from "@neondatabase/serverless";
 
-if (!process.env.DATABASE_URL) {
-  throw new Error("DATABASE_URL não definida no arquivo de configuração");
-}
+export const sql = neon(process.env.DATABASE_URL); // Conexão com o banco de dados
 
-export const sql = neon(process.env.DATABASE_URL);
-
-const PORT = process.env.PORT || 3000;
-
+// Função de resposta de solicitação
 const requestHandler = async (req, res) => {
   try {
     const result = await sql`SELECT version()`;
     const { version } = result[0];
+
     res.writeHead(200, { "Content-Type": "text/plain" });
     res.end(version);
   } catch (error) {
-    console.error("Erro ao conectar com o banco de dados:", error);
+    console.error("Erro na conexão com o banco de dados:", error);
     res.writeHead(500, { "Content-Type": "text/plain" });
-    res.end("Erro interno do servidor");
+    res.end("Erro ao conectar ao banco de dados");
   }
 };
 
-http.createServer(requestHandler).listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+// Cria o servidor e escuta na porta 3000
+createServer(requestHandler).listen(3000, () => {
+  console.log("Servidor rodando em http://localhost:3000");
 });
-

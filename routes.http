@@ -1,4 +1,5 @@
-POST https://todo-server-gdw2.onrender.com/tasks
+// rota para adicionar dados na tabela tasks
+POST http://localhost:3333/tasks
 Content-Type: application/json
 
 {
@@ -7,20 +8,37 @@ Content-Type: application/json
 }
 
 ###
+PUT  http://localhost:3333/tasks/2
+Content-Type: application/json
 
-GET https://todo-server-gdw2.onrender.com/tasks
+{
+    "newtext": "michael",
+    "id": 2 
+}
+
+
+###
+// rota para buscar dados na tabela tasks
+GET http://localhost:3333/tasks
 
 ### 
 
+//rota para deletar dados na tabela tasks
 DELETE https://todo-server-gdw2.onrender.com/tasks
 
 
+// rota para registrar dados na tabela users
 ###
 POST http://localhost:3333/register
 Content-Type: application/json
 
 {
-  "username": "Uio",
-  "email": "123@exemplo.com",
-  "password": "123senha123ee"
+  "username": "michael",
+  "email": "michael@exemplo.com",
+  "password": "moranisdev"
 }
+
+// buscar dados na tabela users
+###
+GET http://localhost:3333/register
+

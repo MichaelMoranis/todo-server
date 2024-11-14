@@ -21,7 +21,7 @@ const database = new DatabasePostgres();
 const server = fastify();
 
 server.register(cors, {
-  origin: ["http://localhost:5173", "http://localhost:3333"], // Origens permitidas
+  origin: ["http://localhost:5173", "https://todo-server-zdjm.onrender.com"], // Origens permitidas
   methods: ["GET", "POST", "PUT", "DELETE"], // Métodos permitidos
   credentials: true, // Permitir cookies ou autenticação se necessário
 });

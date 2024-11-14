@@ -1,4 +1,5 @@
 import { sql } from "./sql";
+import * as bcrypt from "bcrypt"
 
 export default interface Task {
   newtext: string;
@@ -11,7 +12,6 @@ export interface User {
   email: string;
   password: string;
 }
-
 
 export class DatabasePostgres {
   async list() {
@@ -51,12 +51,12 @@ export class DatabasePostgres {
   }
 
   // funções para gerenciamento dos dados tabela users 
-  async createUser(user: User) {
-    const { username, email, password } = user;
+  async createUser({ username, email, password }: User) {
+    const handlePass = await bcrypt.hash(password, 10)
 
     const result = await sql`
     insert into users (username, email, password)
-    VALUES (${username}, ${email}, ${password})
+    VALUES (${username}, ${email}, ${handlePass})
     returning id, username, email, created_at;
   `;
     const newUserId = result[0].id;
@@ -66,6 +66,14 @@ export class DatabasePostgres {
   async listUser() {
     const user = await sql`select  * from users`
     return user
+  }
+
+  async findByUsername(username: string) {
+    const userResult = await sql`
+     select * from users where username = ${username}
+    ` 
+
+    return userResult[0]
   }
 
 }

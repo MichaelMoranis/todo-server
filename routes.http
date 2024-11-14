@@ -1,9 +1,10 @@
 // rota para adicionar dados na tabela tasks
 POST http://localhost:3333/tasks
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pa2VQQVNTYWRkZCIsImlhdCI6MTczMTYwNzgyMSwiZXhwIjoxNzMxNjExNDIxfQ.EoeWujaJ54cH1O8wxSTbNrg1AIjCCJgLJUxLUF__870
 
 {
-    "newtext": "server",
+    "newtext": "sou do banco",
     "isChecked": true
 }
 
@@ -15,7 +16,6 @@ Content-Type: application/json
     "newtext": "michael",
     "id": 2 
 }
-
 
 ###
 // rota para buscar dados na tabela tasks
@@ -33,12 +33,22 @@ POST http://localhost:3333/register
 Content-Type: application/json
 
 {
-  "username": "michael",
-  "email": "michael@exemplo.com",
-  "password": "moranisdev"
+  "username": "mike",
+  "email": "@exemplo.com",
+  "password": "jsmdoc"
 }
 
 // buscar dados na tabela users
 ###
 GET http://localhost:3333/register
 
+
+### 
+POST http://localhost:3333/login
+Content-Type: application/json
+
+{
+  "username": "mike",
+  "email": "@exemplo.com",
+  "password": "jsmdoc"
+}

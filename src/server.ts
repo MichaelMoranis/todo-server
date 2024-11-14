@@ -21,7 +21,7 @@ const database = new DatabasePostgres();
 const server = fastify();
 
 server.register(cors, {
-  origin: ["http://localhost:5173", "https://todo-server-9m5t.onrender.com"], // Origens permitidas
+  origin: ["http://localhost:5173", "https://app-tarefa.vercel.app"], // Origens permitidas
   methods: ["GET", "POST", "PUT", "DELETE"], // Métodos permitidos
   credentials: true, // Permitir cookies ou autenticação se necessário
 });

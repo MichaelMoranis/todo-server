@@ -20,11 +20,29 @@ declare module 'fastify' {
 const database = new DatabasePostgres();
 const server = fastify();
 
+// server.register(cors, {
+//   origin: ["http://localhost:5173", "https://app-tarefa.vercel.app"], // Origens permitidas
+//   methods: ["GET", "POST", "PUT", "DELETE"], // Métodos permitidos
+//   credentials: true, // Permitir cookies ou autenticação se necessário
+// });
+
 server.register(cors, {
-  origin: ["http://localhost:5173", "https://app-tarefa.vercel.app"], // Origens permitidas
-  methods: ["GET", "POST", "PUT", "DELETE"], // Métodos permitidos
-  credentials: true, // Permitir cookies ou autenticação se necessário
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      "https://app-tarefa.vercel.app",
+      "http://localhost:5173",
+      "http://localhost:3000",
+      "https://todo-server-9m5t.onrender.com",
+    ];
+    
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true); // Origem permitida
+    } else {
+      callback(null, false);
+    }
+  },
 });
+
 // rota para adicionar itens na lista array
 server.post("/tasks", { preHandler: verifyToken }, async (request, reply) => {
   const body = request.body as Omit<Task, "id">;

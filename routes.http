@@ -29,7 +29,7 @@ Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNyZS
 DELETE https://todo-server-gdw2.onrender.com/tasks
 
 
-// rota para registrar dados na tabela users
+// ROTA PARA USUARIOS
 ###
 POST https://todo-server-9m5t.onrender.com/register
 Content-Type: application/json
@@ -41,8 +41,7 @@ Content-Type: application/json
 
 // buscar dados na tabela users
 ###
-GET http://localhost:3333/register
-
+GET https://todo-server-9m5t.onrender.com/register
 
 ### 
 POST https://todo-server-9m5t.onrender.com/login

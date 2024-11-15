@@ -26,8 +26,22 @@ server.register(cors, {
     "https://app-tarefa.vercel.app",
     "https://todo-server-zdjm.onrender.com"
   ], // Origens permitidas
-  methods: ["GET", "POST", "PUT", "DELETE"], // Métodos permitidos
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Métodos permitidos
   credentials: true, // Permitir cookies ou autenticação se necessário
+});
+
+server.addHook("onSend", async (request, reply, payload) => {
+  reply.header("Access-Control-Allow-Origin", request.headers.origin || "*");
+  reply.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  reply.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  return payload;
+});
+server.options("*", (request, reply) => {
+  reply
+    .header("Access-Control-Allow-Origin", request.headers.origin || "*")
+    .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    .header("Access-Control-Allow-Headers", "Content-Type, Authorization")
+    .send();
 });
 
 // rota para adicionar itens na lista array
@@ -108,18 +122,19 @@ server.post<{ Body: Omit<User, "id"> }>("/login", async (request, reply) => {
 
 // Middleware para verificar o token
 async function verifyToken(request: FastifyRequest<{ Headers: { authorization: string } }>,
-  reply: FastifyReply) {
-  const authHeader = request.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1]; // Extrair o token da string "Bearer <token>"
-
-  if (!token) {
-    return reply.status(401).send({ error: "Token ausente" });
-  }
+  reply: FastifyReply) {  
 
   try {
+    const authHeader = request.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1]; 
     const user = jwt.verify(token, JWT_SECRET) as User;
     request.user = user
     // Verifica o token com a chave secreta // Adiciona o usuário ao request, para ser acessado nas rotas
+
+    if (!token) {
+      return reply.status(401).send({ error: "Token ausente" });
+    }
+
   } catch (error: any) {
     return reply.status(403).send({ error: "Token inválido" });
   }

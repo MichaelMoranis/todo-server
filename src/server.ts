@@ -11,6 +11,7 @@ declare module 'fastify' {
 }
 
 const server = fastify();
+server.register(userRoutes);
 
 server.register(cors, {
   origin: [
@@ -30,8 +31,6 @@ server.addHook("onSend", async (request, reply, payload) => {
 });
 
 // rota para adicionar itens na lista array
-server.register(taskRoutes, { prefix: '/tasks' })
-server.register(userRoutes, { prefix: '/users' });
 
 
 const PORT = Number(process.env.PORT) || 3333;

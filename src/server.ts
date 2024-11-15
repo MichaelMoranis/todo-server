@@ -36,13 +36,7 @@ server.addHook("onSend", async (request, reply, payload) => {
   reply.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   return payload;
 });
-server.options("*", (request, reply) => {
-  reply
-    .header("Access-Control-Allow-Origin", request.headers.origin || "*")
-    .header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-    .header("Access-Control-Allow-Headers", "Content-Type, Authorization")
-    .send();
-});
+
 
 // rota para adicionar itens na lista array
 server.post("/tasks", { preHandler: verifyToken }, async (request, reply) => {

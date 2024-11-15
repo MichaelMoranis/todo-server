@@ -29,13 +29,13 @@ DELETE https://todo-server-gdw2.onrender.com/tasks
 
 // rota para registrar dados na tabela users
 ###
-POST http://localhost:3333/register
+POST https://todo-server-9m5t.onrender.com/register
 Content-Type: application/json
 
 {
-  "username": "mike",
-  "email": "@exemplo.com",
-  "password": "jsmdoc"
+  "username": "jhon",
+  "email": "@jhon.com",
+  "password": "jhon"
 }
 
 // buscar dados na tabela users
@@ -44,11 +44,11 @@ GET http://localhost:3333/register
 
 
 ### 
-POST http://localhost:3333/login
+POST https://todo-server-9m5t.onrender.com/login
 Content-Type: application/json
 
 {
-  "username": "mike",
-  "email": "@exemplo.com",
-  "password": "jsmdoc"
+  "username": "jhon",
+  "email": "@jhon.com",
+  "password": "jhon"
 }

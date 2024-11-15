@@ -1,7 +1,7 @@
 // rota para adicionar dados na tabela tasks
-POST http://localhost:3333/tasks
+POST https://todo-server-9m5t.onrender.com/tasks
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pa2VQQVNTYWRkZCIsImlhdCI6MTczMTYwNzgyMSwiZXhwIjoxNzMxNjExNDIxfQ.EoeWujaJ54cH1O8wxSTbNrg1AIjCCJgLJUxLUF__870
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNyZSIsImlhdCI6MTczMTY3NzU4MCwiZXhwIjoxNzMxNjgxMTgwfQ.-V4-ERaCIq1deFC5p4z5DNO7NLhs3JNppTqjuzL_ZPU
 
 {
     "newtext": "sou do banco",
@@ -19,7 +19,9 @@ Content-Type: application/json
 
 ###
 // rota para buscar dados na tabela tasks
-GET http://localhost:3333/tasks
+GET https://todo-server-9m5t.onrender.com/tasks
+Content-Type: application/json 
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNyZSIsImlhdCI6MTczMTY3NzM2MSwiZXhwIjoxNzMxNjgwOTYxfQ.PHw67uGrRRK64Mp2V1xureP4OsyShiWyjwTf-8W8y-w
 
 ### 
 
@@ -31,11 +33,10 @@ DELETE https://todo-server-gdw2.onrender.com/tasks
 ###
 POST https://todo-server-9m5t.onrender.com/register
 Content-Type: application/json
-
 {
-  "username": "jhon",
-  "email": "@jhon.com",
-  "password": "jhon"
+  "username": "cre",
+  "email": "@cre.com",
+  "password": "cre"
 }
 
 // buscar dados na tabela users
@@ -48,7 +49,7 @@ POST https://todo-server-9m5t.onrender.com/login
 Content-Type: application/json
 
 {
-  "username": "jhon",
-  "email": "@jhon.com",
-  "password": "jhon"
+  "username": "cre",
+  "email": "@cre.com",
+  "password": "cre"
 }

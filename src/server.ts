@@ -21,7 +21,11 @@ const database = new DatabasePostgres();
 const server = fastify();
 
 server.register(cors, {
-  origin: ["http://localhost:5173", "https://app-tarefa.vercel.app", "https://todo-server-zdjm.onrender.com"], // Origens permitidas
+  origin: [
+    "http://localhost:5173",
+    "https://app-tarefa.vercel.app",
+    "https://todo-server-zdjm.onrender.com"
+  ], // Origens permitidas
   methods: ["GET", "POST", "PUT", "DELETE"], // Métodos permitidos
   credentials: true, // Permitir cookies ou autenticação se necessário
 });
@@ -38,7 +42,7 @@ server.post("/tasks", { preHandler: verifyToken }, async (request, reply) => {
   }
 });
 
-server.get("/tasks", async (req, reply) => {
+server.get("/tasks", { preHandler: verifyToken }, async (req, reply) => {
   const tasks = await database.list();
 
   return reply.send(tasks);
@@ -120,9 +124,6 @@ async function verifyToken(request: FastifyRequest<{ Headers: { authorization: s
     return reply.status(403).send({ error: "Token inválido" });
   }
 }
-
-
-
 
 const PORT = Number(process.env.PORT) || 3333;
 const HOST = "0.0.0.0";

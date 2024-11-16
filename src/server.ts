@@ -18,7 +18,7 @@ server.register(cors, {
   origin: [
     "http://localhost:5173",
     "https://app-tarefa.vercel.app",
-    "https://todo-server-9m5t.onrender.com/register"
+    "https://todo-server-9m5t.onrender.com"
   ], // Origens permitidas
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Métodos permitidos
   credentials: true, // Permitir cookies ou autenticação se necessário

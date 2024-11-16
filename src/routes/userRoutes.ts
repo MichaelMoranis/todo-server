@@ -24,7 +24,7 @@ server.post("/register", async (request, reply) => {
   
   // listar usuarios da tabela users 
   server.get("/register", async (req, reply) => {
-    const users = await database.listUser();
+    const users = await database.listUsers();
   
     return reply.send(users);
   });
@@ -32,10 +32,10 @@ server.post("/register", async (request, reply) => {
   //rota de login tabela users
   server.post<{ Body: Omit<User, "id"> }>("/login", async (request, reply) => {
     const { username, password } = request.body as Omit<User, "id">;
-    const user = await database.findByUsername(username)
+    const user = await database.findUserByUsername(username)
   
     if (!user || !(await bcrypt.compare(password, user.password))) {
-      return reply.status(401).send({ error: `credenciais invalidas !!!! ${user.password}` })
+      return reply.status(401).send({ error: `credenciais invalidas !!!! ${user?.password}` })
     }
     const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: "1h" })
     return reply.send({ token })

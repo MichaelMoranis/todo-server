@@ -2,6 +2,7 @@ import fastify from "fastify";
 import cors from "@fastify/cors";
 import { taskRoutes } from "./routes/task.routes";
 import { User } from "./types/types";
+import { userRoutes } from "./routes/user.routes";
 
 declare module 'fastify' {
   interface FastifyRequest {
@@ -11,6 +12,8 @@ declare module 'fastify' {
 
 const server = fastify();
 taskRoutes(server)
+userRoutes(server)
+
 
 server.register(cors, {
   origin: [

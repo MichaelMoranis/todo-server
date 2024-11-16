@@ -1,4 +1,4 @@
-import fastify, { FastifyReply, FastifyRequest } from "fastify";
+import fastify from "fastify";
 import cors from "@fastify/cors";
 import { taskRoutes } from "./routes/taskRoutes";
 import { User } from "./types/types";
@@ -18,7 +18,7 @@ server.register(cors, {
   origin: [
     "http://localhost:5173",
     "https://app-tarefa.vercel.app",
-    "https://todo-server-zdjm.onrender.com"
+    "https://todo-server-9m5t.onrender.com/register"
   ], // Origens permitidas
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Métodos permitidos
   credentials: true, // Permitir cookies ou autenticação se necessário

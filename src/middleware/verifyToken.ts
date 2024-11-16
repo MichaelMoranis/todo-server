@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { JWT_SECRET } from "../utils/config";
-import { User } from "../database/database-postgres";
 import jwt from "jsonwebtoken";
+import { User } from "../types/types";
 
 // Middleware para verificar o token
 export async function verifyToken(request: FastifyRequest<{ Headers: { authorization: string } }>,

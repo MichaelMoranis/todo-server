@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
+import { verifyToken } from "../middleware/auth.middleware";
 import { TaskController } from "../controllers/task.controller";
-import { verifyToken } from "../middlewares/auth.middleware";
 
 export async function taskRoutes(server: FastifyInstance) {
     const taskController = new TaskController();

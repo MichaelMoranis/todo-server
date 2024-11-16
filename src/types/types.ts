@@ -1,3 +1,8 @@
+export interface TaskParams {
+  id: number;
+  params: string;
+}
+
 export interface User {
     username: string;
     email: string;

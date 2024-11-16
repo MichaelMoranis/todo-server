@@ -1,6 +1,6 @@
-import { sql } from "../database/sql";
 import * as bcrypt from "bcrypt";
 import { User } from "../types/types";
+import { sql } from "../conect-database/sql";
 
 export class UserService {
   async createUser({ username, email, password }: User): Promise<number> {
@@ -25,3 +25,5 @@ export class UserService {
     return userResult[0] || null;
   }
 }
+
+

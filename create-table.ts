@@ -1,4 +1,4 @@
-import { sql } from "./src/database/sql"
+import { sql } from "./src/conect-database/sql"
 
 // sql`DROP TABLE IF EXISTS tasks`.then(() => {
 //     console.log("tabela apagada !!")

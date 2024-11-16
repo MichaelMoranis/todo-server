@@ -1,8 +1,7 @@
 import fastify from "fastify";
 import cors from "@fastify/cors";
-import { taskRoutes } from "./routes/taskRoutes";
+import { taskRoutes } from "./routes/task.routes";
 import { User } from "./types/types";
-import { userRoutes } from "./routes/userRoutes";
 
 declare module 'fastify' {
   interface FastifyRequest {
@@ -12,12 +11,11 @@ declare module 'fastify' {
 
 const server = fastify();
 taskRoutes(server)
-userRoutes(server)
 
 server.register(cors, {
   origin: [
     "http://localhost:5173",
-    "https://app-tarefa.vercel.app",
+    "https://app-tarefa.vercel.japp",
     "https://todo-server-9m5t.onrender.com"
   ], // Origens permitidas
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Métodos permitidos

@@ -4,7 +4,7 @@ export interface TaskParams {
   }
   
   export default interface Task {
-    newtext: string;
+    newtext?: string;
     isChecked?: boolean;
     id?: number
   }

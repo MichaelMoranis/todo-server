@@ -26,7 +26,7 @@ Content-Type: application/json
 ### 
 
 //rota para deletar dados na tabela tasks
-DELETE http://localhost:3333/tasks
+DELETE http://localhost:3333/tasks/2
 
 //==============================================================================================
 

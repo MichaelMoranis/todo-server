@@ -1,24 +1,13 @@
-import { sql } from "./sql";
+import { sql } from "../conect-database/sql";
 import * as bcrypt from "bcrypt"
-
-export default interface Task {
-  newtext: string;
-  isChecked?: boolean;
-  id?: number
-}
-
-export interface User {
-  username: string;
-  email: string;
-  password: string;
-}
+import Task, { User } from "../types/types";
 
 export class DatabasePostgres {
   async list() {
     const task = await sql`select * from tasks`;
     return task;
   }
-
+  
   async create(task: Task) {
     const { newtext, isChecked } = task;
     const result = await sql`

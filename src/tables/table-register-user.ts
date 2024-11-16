@@ -1,8 +1,11 @@
-import { sql } from "./sql"
+import { sql } from "../conect-database/sql"
+
 
 // sql`DROP TABLE IF EXISTS users`.then(() => {
 //     console.log("tabela de usuários apagada!")
 // })
+
+// console.log('Connection string:', process.env.DATABASE_URL);
 
 sql`
  CREATE TABLE users (

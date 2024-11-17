@@ -1,7 +1,7 @@
 // rota para adicionar dados na tabela tasks
 POST http://localhost:3333/tasks
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNyZSIsImlhdCI6MTczMTc1ODI3MSwiZXhwIjoxNzMxNzYxODcxfQ.9ajfu8NVl0cKYsG-61_kwn8dG8B0u3TC9CpaOKQnK98
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pY2hhZWwiLCJpYXQiOjE3MzE3ODg0NTIsImV4cCI6MTczMTc5MjA1Mn0.IbDT3AAKrpHsV7pJqMKXBNTahrrgPG5S-vT8Sn-YDG0
 
 {
     "newtext": "rota funciona",
@@ -12,7 +12,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNyZ
 // rota para buscar dados na tabela tasks
 GET http://localhost:3333/tasks
 Content-Type: application/json 
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNyZSIsImlhdCI6MTczMTc1ODI3MSwiZXhwIjoxNzMxNzYxODcxfQ.9ajfu8NVl0cKYsG-61_kwn8dG8B0u3TC9CpaOKQnK98
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pY2hhZWwiLCJpYXQiOjE3MzE4NDEyODYsImV4cCI6MTczMTg0NDg4Nn0.94uBkufKRrWfObzsVVr52WIHdJxrE2KDpCC_HFZh2ew
 
 ###
 PUT  http://localhost:3333/tasks/2
@@ -50,7 +50,7 @@ POST http://localhost:3333/login
 Content-Type: application/json
 
 {
-  "username": "cre",
-  "email": "@cre.com",
-  "password": "cre"
+  "username": "michael",
+  "email": "michaelmoranesul@gmail.com",
+  "password": "dede"
 }

@@ -5,25 +5,28 @@ import Task, {  User } from "../types/types";
 export class DatabasePostgres {
   private taskService = new TaskService();
   private userService = new UserService();
+  
 
 
-    async listTask(): Promise<Task[]> {
+    async listTaskController(): Promise<Task[]> {
       return await this.taskService.list();
     }
 
-    async createTask(task: Task): Promise<number> {
+    async createtaskController(task: Task): Promise<number> {
       return await this.taskService.create(task);
     }
   
-    async updateTask(task: Task): Promise<Task> {
+    async updateTaskController(task: Task): Promise<Task> {
       return await this.taskService.update(task);
     }
   
-    async deleteTask(id: number): Promise<void> {
+    async deleteTaskControllers(id: number): Promise<void> {
       await this.taskService.delete(id);
     }
 
-    async createUser(user: User): Promise<number> {
+    /// ======================================================
+
+    async createUser(user: User): Promise<User[]> {
       return await this.userService.createUser(user);
     }
   
@@ -31,9 +34,9 @@ export class DatabasePostgres {
       return await this.userService.listUser();
     }
   
-    async findUserByUsername(username: string): Promise<User | null> {
+    async findByUsername(username: string) {
       return await this.userService.findByUsername(username);
-    }
+  }
 
  }
 

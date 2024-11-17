@@ -1,12 +1,18 @@
 // rota para adicionar dados na tabela tasks
-POST https://todo-server-9m5t.onrender.com/tasks
+POST http://localhost:3333/tasks
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNyZSIsImlhdCI6MTczMTY3NzU4MCwiZXhwIjoxNzMxNjgxMTgwfQ.-V4-ERaCIq1deFC5p4z5DNO7NLhs3JNppTqjuzL_ZPU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pY2hhZWwiLCJpYXQiOjE3MzE3ODg0NTIsImV4cCI6MTczMTc5MjA1Mn0.IbDT3AAKrpHsV7pJqMKXBNTahrrgPG5S-vT8Sn-YDG0
 
 {
-    "newtext": "sou do banco",
+    "newtext": "rota funciona",
     "isChecked": true
 }
+
+###
+// rota para buscar dados na tabela tasks
+GET http://localhost:3333/tasks
+Content-Type: application/json 
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pY2hhZWwiLCJpYXQiOjE3MzE4NDEyODYsImV4cCI6MTczMTg0NDg4Nn0.94uBkufKRrWfObzsVVr52WIHdJxrE2KDpCC_HFZh2ew
 
 ###
 PUT  http://localhost:3333/tasks/2
@@ -17,38 +23,34 @@ Content-Type: application/json
     "id": 2 
 }
 
-###
-// rota para buscar dados na tabela tasks
-GET https://todo-server-9m5t.onrender.com/tasks
-Content-Type: application/json 
-Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNyZSIsImlhdCI6MTczMTY3NzM2MSwiZXhwIjoxNzMxNjgwOTYxfQ.PHw67uGrRRK64Mp2V1xureP4OsyShiWyjwTf-8W8y-w
-
 ### 
 
 //rota para deletar dados na tabela tasks
-DELETE https://todo-server-gdw2.onrender.com/tasks
+DELETE http://localhost:3333/tasks/2
 
+//==============================================================================================
 
 // ROTA PARA USUARIOS
 ###
-POST https://todo-server-9m5t.onrender.com/register
+POST http://localhost:3333/register
 Content-Type: application/json
+
 {
-  "username": "cre",
-  "email": "@cre.com",
-  "password": "cre"
+  "username": "pode",
+  "email": "@pode.com",
+  "password": "pode"
 }
 
 // buscar dados na tabela users
 ###
-GET https://todo-server-9m5t.onrender.com/register
+GET http://localhost:3333/register
 
 ### 
-POST https://todo-server-9m5t.onrender.com/login
+POST http://localhost:3333/login
 Content-Type: application/json
 
 {
-  "username": "cre",
-  "email": "@cre.com",
-  "password": "cre"
+  "username": "michael",
+  "email": "michaelmoranesul@gmail.com",
+  "password": "dede"
 }

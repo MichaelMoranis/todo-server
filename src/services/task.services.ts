@@ -1,7 +1,5 @@
-
 import { sql } from "../conect-database/sql";
-import { Task } from "../types/types";
-
+import Task from "../types/types";
 
 
 export class TaskService {

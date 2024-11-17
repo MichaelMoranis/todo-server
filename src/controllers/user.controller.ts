@@ -1,11 +1,11 @@
 import { FastifyReply, FastifyRequest } from "fastify";
+import { DatabasePostgres } from "../database/database-postgres";
 import { User } from "../types/types";
 import * as jwt from "jsonwebtoken"
-import { JWT_SECRET } from "../utils/config";
 import * as brcrypt from "bcrypt"
-import { DatabasePostgres } from "../database/database-postgres";
+import { JWT_SECRET } from "../utils/config";
 
-export class userController {
+export class UserController {
     private database: DatabasePostgres
 
     constructor() {
@@ -33,14 +33,16 @@ export class userController {
 
 
     async loginUser(request: FastifyRequest, reply: FastifyReply) {
-        const { username, password } = request.body as Omit<User, "id">;
-        const user = await this.database.findUserByUsername(username)
-      
-        if (!user || !(await brcrypt.compare(password, user.password))) {
-          return reply.status(401).send({ error: `credenciais invalidas !!!! ${user?.password}` })
-        }
-        const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: "1h" })
-        return reply.send({ token })
-    }
+      const { username, password } = request.body as Omit<User, "id">;
+
+     const user = await this.database.findByUsername(username)
+   
+     if (!user || !(await brcrypt.compare(password, user.password))) {
+       return reply.status(401).send({ error: `credenciais invalidas !!!! ${user?.password}` })
+     }
+     const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: "1h" })
+     return reply.send({ token })
+   }
+  
 
 }

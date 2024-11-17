@@ -1,8 +1,3 @@
-// import { FastifyInstance } from "fastify";
-// import { verifyToken } from "../middleware/verifyToken";
-// import Task from "../types/types";
-// import { DatabasePostgres } from "../database/database-postgres";
-
 import { FastifyInstance } from "fastify";
 import { verifyToken } from "../middleware/verifyToken";
 import Task, { TaskParams } from "../types/types";

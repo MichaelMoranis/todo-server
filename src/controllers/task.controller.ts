@@ -1,5 +1,3 @@
-import { DatabasePostgres } from "../database/database-postgres"
-
 import { FastifyInstance } from "fastify";
 import Task, { TaskParams } from "../types/types";
 import { verifyToken } from "../middleware/verifyToken";

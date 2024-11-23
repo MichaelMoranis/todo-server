@@ -1,3 +1,4 @@
+
 import { FastifyInstance } from "fastify";
 import { DatabasePostgres } from "../database/database-postgres";
 import { User } from "../types/types";
@@ -5,6 +6,14 @@ import { JWT_SECRET } from "../utils/config";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken";
 
+
+const database = new DatabasePostgres()
+
+export const userRoutes = (server: FastifyInstance) => {
+    // rotas para adicionar, listar, deletar e atualizar dados na tabela de usuarios (users)
+server.post("/register", async (request, reply) => {
+    const { username, email, password } = request.body as Omit<User, "id">;
+  
 const database = new DatabasePostgres()
 
 export const userRoutes = (server: FastifyInstance) => {
@@ -21,13 +30,14 @@ export const userRoutes = (server: FastifyInstance) => {
       return reply.status(500).send("nao foi possivel criar o usuario")
     }
   })
-
+  
   // listar usuarios da tabela users 
   server.get("/register", async (req, reply) => {
     const users = await database.listUsers();
-
+  
     return reply.send(users);
   });
+  
 
   //rota de login tabela users
   server.post<{ Body: Omit<User, "id"> }>("/login", async (request, reply) => {

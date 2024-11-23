@@ -1,4 +1,20 @@
 export interface TaskParams {
+
+    id: number;
+    params: string;
+  }
+  
+  export default interface Task {
+    newtext?: string;
+    isChecked?: boolean;
+    id?: number
+  }
+  
+  export interface User {
+    username: string;
+    email: string;
+    password: string; // Opcional para listagem
+  }
   id: number;
   params: string;
 }
@@ -14,3 +30,4 @@ export interface User {
   email: string;
   password: string; // Opcional para listagem
 }
+

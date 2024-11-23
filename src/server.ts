@@ -4,7 +4,6 @@ import { User } from "./types/types";
 import { userRoutes } from "./routes/user.routes";
 import { taskRoutes } from "./controllers/task.controller";
 
-
 declare module 'fastify' {
   interface FastifyRequest {
     user?: User; // Agora, 'user' está tipado corretamente
@@ -14,7 +13,6 @@ declare module 'fastify' {
 const server = fastify();
 taskRoutes(server)
 userRoutes(server)
-
 
 server.register(cors, {
   origin: [

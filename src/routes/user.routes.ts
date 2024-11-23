@@ -10,13 +10,6 @@ import jwt from "jsonwebtoken";
 const database = new DatabasePostgres()
 
 export const userRoutes = (server: FastifyInstance) => {
-    // rotas para adicionar, listar, deletar e atualizar dados na tabela de usuarios (users)
-server.post("/register", async (request, reply) => {
-    const { username, email, password } = request.body as Omit<User, "id">;
-  
-const database = new DatabasePostgres()
-
-export const userRoutes = (server: FastifyInstance) => {
   // rotas para adicionar, listar, deletar e atualizar dados na tabela de usuarios (users)
   server.post("/register", async (request, reply) => {
     const { username, email, password } = request.body as Omit<User, "id">;

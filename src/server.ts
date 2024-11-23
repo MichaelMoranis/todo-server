@@ -1,8 +1,5 @@
 import fastify from "fastify";
 import cors from "@fastify/cors";
-import { taskRoutes } from "./routes/task.routes";
-import { User } from "./types/types";
-import { userRoutes } from "./routes/user.routes";
 import { User } from "./types/types";
 import { userRoutes } from "./routes/user.routes";
 import { taskRoutes } from "./controllers/task.controller";

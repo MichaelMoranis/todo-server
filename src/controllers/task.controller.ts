@@ -1,6 +1,7 @@
 import { FastifyInstance } from "fastify";
 import Task, { TaskParams } from "../types/types";
 import { verifyToken } from "../middleware/verifyToken";
+import { DatabasePostgres } from "../database/database-postgres";
 
 const database = new DatabasePostgres()
 

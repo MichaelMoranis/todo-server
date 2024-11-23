@@ -1,3 +1,4 @@
+
 import { FastifyInstance } from "fastify";
 import { verifyToken } from "../middleware/verifyToken";
 import Task, { TaskParams } from "../types/types";
@@ -50,14 +51,3 @@ export const taskRoutes = (server: FastifyInstance) => {
 }
 
 
-
-// export async function taskRoutes(server: FastifyInstance) {
-//     const taskController = new TaskController()
-
-    // server.post("/tasks", {preHandler: verifyToken}, taskController.createTask)
-//     server.get("/tasks", {preHandler: verifyToken}, taskController.listTask)
-//     server.put("/tasks/:id", {preHandler: verifyToken}, taskController.updateTask)
-//     server.delete("/tasks/:id", {preHandler: verifyToken}, taskController.deleteTask)
-
-
-// }

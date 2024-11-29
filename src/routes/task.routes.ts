@@ -1,53 +1,24 @@
-
-import { FastifyInstance } from "fastify";
+import { TaskController } from "../controllers/task.controller";
+import server from "../server";
 import { verifyToken } from "../middleware/verifyToken";
 import Task, { TaskParams } from "../types/types";
-import { DatabasePostgres } from "../database/database-postgres";
 
-const database = new DatabasePostgres()
+export async function taskRoutes() {
+  const taskController = new TaskController();
 
-export const taskRoutes = (server: FastifyInstance) => {
-    server.post("/tasks", { preHandler: verifyToken }, async (request, reply) => {
-        const body = request.body as Omit<Task, "id">;
+  server.post("/tasks", { preHandler: verifyToken }, async (request, reply) => {
+    return taskController.createTask(request, reply);
+  });
 
-        try {
-            const newTask = await database.createtaskController(body);
-            return reply.status(201).send(newTask);
-        } catch (error) {
-            return reply.status(500).send("Erro interno do servidor");
-        }
-    });
+  server.get("/tasks", { preHandler: verifyToken }, async (request, reply) => {
+    return taskController.listTask(request, reply);
+  });
 
-    server.get("/tasks", { preHandler: verifyToken }, async (req, reply) => {
-        const tasks = await database.listTaskController();
+  server.put<{ Body: Task, Params: TaskParams }>("/tasks/:id", async (request, reply) => {
+    return taskController.updateTask(request, reply);
+  });
 
-        return reply.send(tasks);
-    });
-
-    // rotas para atualizar itens na lista
-    server.put<{ Body: Task, Params: TaskParams }>("/tasks/:id", async (request, reply) => {
-        const { newtext } = request.body
-        const { id } = request.params
-
-        try {
-            await database.updateTaskController({ id, newtext })
-
-            return reply.status(204).send();
-        } catch (error) {
-            console.log("deu erro ao atualizar")
-            return reply.status(500).send({ error: "erro na atualizaçao" })
-        }
-
-    })
-
-    // rota para deletar itens na lista
-    server.delete<{ Params: TaskParams }>("/tasks/:id", async (request, reply) => {
-        const { id } = request.params;
-
-        await database.deleteTaskControllers(id);
-        return reply.status(204).send();
-    });
-
+  server.delete<{ Params: TaskParams }>("/tasks/:id", async (request, reply) => {
+    return taskController.deleteTask(request, reply);
+  });
 }
-
-

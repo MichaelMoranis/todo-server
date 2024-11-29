@@ -1,50 +1,27 @@
-import { FastifyInstance } from "fastify";
+import { FastifyReply, FastifyRequest } from "fastify";
+import { TaskService } from "../services/task.services";
 import Task, { TaskParams } from "../types/types";
-import { verifyToken } from "../middleware/verifyToken";
-import { DatabasePostgres } from "../database/database-postgres";
 
-const database = new DatabasePostgres()
+export class TaskController {
+  private taskService = new TaskService();
 
-export const taskRoutes = (server: FastifyInstance) => {
-    server.post("/tasks", { preHandler: verifyToken }, async (request, reply) => {
-        const body = request.body as Omit<Task, "id">;
+  // Controlador para criar uma nova tarefa
+  async createTask(request: FastifyRequest, reply: FastifyReply) {
+    return this.taskService.createTask(request, reply);
+  }
 
-        try {
-            const newTask = await database.createtaskController(body);
-            return reply.status(201).send(newTask);
-        } catch (error) {
-            return reply.status(500).send("Erro interno do servidor");
-        }
-    });
+  // Controlador para listar tarefas
+  async listTask(request: FastifyRequest, reply: FastifyReply) {
+    return this.taskService.listTask(request, reply);
+  }
 
-    server.get("/tasks", { preHandler: verifyToken }, async (req, reply) => {
-        const tasks = await database.listTaskController();
+  // Controlador para atualizar uma tarefa
+  async updateTask(request: FastifyRequest<{ Body: Task; Params: TaskParams }>, reply: FastifyReply) {
+    return this.taskService.updateTask(request, reply);
+  }
 
-        return reply.send(tasks);
-    });
-
-    // rotas para atualizar itens na lista
-    server.put<{ Body: Task, Params: TaskParams }>("/tasks/:id", async (request, reply) => {
-        const { newtext } = request.body
-        const { id } = request.params
-
-        try {
-            await database.updateTaskController({ id, newtext })
-
-            return reply.status(204).send();
-        } catch (error) {
-            console.log("deu erro ao atualizar")
-            return reply.status(500).send({ error: "erro na atualizaçao" })
-        }
-
-    })
-
-    // rota para deletar itens na lista
-    server.delete<{ Params: TaskParams }>("/tasks/:id", async (request, reply) => {
-        const { id } = request.params;
-
-        await database.deleteTaskControllers(id);
-        return reply.status(204).send();
-    });
-
+  // Controlador para deletar uma tarefa
+  async deleteTask(request: FastifyRequest<{ Params: TaskParams }>, reply: FastifyReply) {
+    return this.taskService.deleteTask(request, reply);
+  }
 }

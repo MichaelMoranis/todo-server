@@ -1,37 +1,47 @@
-import * as bcrypt from "bcrypt";
 import { User } from "../types/types";
-import { sql } from "../conect-database/sql";
+import { DatabasePostgres } from "../database/database-postgres";
+import { FastifyReply, FastifyRequest } from "fastify";
+import { JWT_SECRET } from "../utils/config";
+import * as bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
 
 export class UserService {
-  async createUser({ username, email, password }: User): Promise<User[]> {
-    const handlePass = await bcrypt.hash(password, 10);
-    const result = await sql`
-      INSERT INTO users (username, email, password)
-      VALUES (${username}, ${email}, ${handlePass})
-      RETURNING id, username, email, created_at;
-    `;
-    return result[0].id;
+  private database: DatabasePostgres
+
+  constructor() {
+    this.database = new DatabasePostgres()
   }
 
-  async listUser(): Promise<User[]> {
-    const users = await sql`SELECT * FROM users`;
-    return users.map(user => ({
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        password: user.password,
-        created_at: user.created_at,
-      }));
+  async createUser(request: FastifyRequest, reply: FastifyReply) {
+    const { username, email, password } = request.body as Omit<User, "id">;
+
+    try {
+      const newUser = await this.database.createUser({ username, email, password });
+      console.log("usuario cadastrado com sucesso" + newUser)
+      return reply.status(201).send(newUser)
+    } catch (error) {
+      console.log("erro do uzuario" + error)
+      return reply.status(500).send("nao foi possivel criar o usuario")
+    }
   }
 
+  async listUser(request: FastifyRequest, reply: FastifyReply) {
+    const users = await this.database.listUser();
 
-  async findByUsername(username: string) {
+    return reply.send(users);
+  }
 
-    const userResult = await sql`
-    select * from users where username = ${username}
-   ` 
+  async loginUser(request: FastifyRequest, reply: FastifyReply) {
+    const { username, password } = request.body as Omit<User, "id">;
+    const user = await this.database.findByUsername(username)
 
-   return userResult[0]
- }
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      return reply.status(401).send({ error: `credenciais invalidas !!!! ${user?.password}` })
+    }
+    const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: "1h" })
+    return reply.send({ token })
+  }
+
 }
+
 

@@ -1,43 +1,46 @@
-import { sql } from "../conect-database/sql";
-import Task from "../types/types";
-
+import { DatabasePostgres } from "../database/database-postgres";
+import Task, { TaskParams } from "../types/types";
+import { FastifyReply, FastifyRequest } from "fastify";
 
 export class TaskService {
+  private database: DatabasePostgres
 
-    async list() {
-        const task = await sql`select * from tasks`;
-        return task;
-      }
+  constructor() {
+    this.database = new DatabasePostgres()
+  }
 
-      async create(task: Task) {
-        const { newtext, isChecked } = task;
-        const result = await sql`
-            insert into tasks (newtext, isChecked)
-            VALUES (${newtext}, ${isChecked})
-            returning id, newtext, isChecked;
-         `;
-        const newTaskId = result[0].id
-        return newTaskId
-      }
-    
-      async update(task: Task) {
-        const { id, newtext } = task
-        const result = await sql`
-          update tasks
-          set newtext = ${newtext}
-          where id = ${id}
-    
-          returning id, newtext
-        `
-        return result[0]
-      }
-    
-      async delete(id: number) {
-        // Remove a tarefa com o ID fornecido
-        await sql`
-            DELETE FROM tasks
-            WHERE id = ${id};
-        `;
-      }
-    
+  async createTask(request: FastifyRequest, reply: FastifyReply) {
+    const body = request.body as Omit<Task, "id">;
+
+    try {
+      const newTask = await this.database.create(body);
+      return reply.status(201).send(newTask);
+    } catch (error) {
+      return reply.status(500).send("Erro interno do servidor");
+    }
+  }
+
+  async listTask(request: FastifyRequest, reply: FastifyReply) {
+    const tasks = await this.database.list();
+    return reply.send(tasks);
+  }
+
+  async updateTask(request: FastifyRequest, reply: FastifyReply) {
+    const { newtext } = request.body as Task
+    const { id } = request.params as Task
+
+    try {
+      await this.database.update({ id, newtext })
+      return reply.status(204).send();
+    } catch (error) {
+      console.log("deu erro ao atualizar")
+      return reply.status(500).send({ error: "erro na atualizaçao" })
+    }
+  }
+
+  async deleteTask(request: FastifyRequest, reply: FastifyReply) {
+    const { id } = request.params as TaskParams;
+    await this.database.delete(id);
+    return reply.status(204).send({ message: "item deletado com sucesso" });
+  }
 }

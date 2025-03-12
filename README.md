@@ -30,6 +30,7 @@ Para iniciar a aplicação em ambiente de desenvolvimento, execute:
 ```bash
 npm run dev
 
+```
 O servidor será iniciado por padrão na porta `3333`. Você pode acessá-lo em [http://localhost:3333](http://localhost:3333).
 
 ### Endpoints Disponíveis:
@@ -38,7 +39,6 @@ O servidor será iniciado por padrão na porta `3333`. Você pode acessá-lo em 
 - **GET** `/tasks`: Lista todas as tarefas.
 - **DELETE** `/tasks/:id`: Deleta uma tarefa pelo ID.
 
-```
 ### Considerações Finais
 
 Estou animado por ter desenvolvido essa API e por ter explorado tecnologias como Fastify e PostgreSQL. Sei que ainda tenho muito a aprender, mas estou ansioso para continuar aprimorando minhas habilidades e criando projetos cada vez mais complexos.
